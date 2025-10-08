@@ -40,19 +40,24 @@
           this.el.setAttribute("look-at","#cam");
 
            // ▼ ここから追記：arrow.png を“ホバー中だけ点滅＆拡大”
-           // PNGの透明を活かして不透明度アニメが効くように
-           this.el.setAttribute('material', 'shader: flat; transparent: true; opacity: 1');
+           // ▼ arrow.png を“ホバー中だけ点滅＆拡大”
+           this.el.classList.add('hotspot'); // ★ 追加：レイキャスト対象にする
 
-           // 点滅（不透明度 1 ↔ 0.45）※ property は 'opacity' にする
+           // マテリアルを明示（flat / 透明 / 不透明度1 / 両面）
+           this.el.setAttribute('material',
+           'shader: flat; transparent: true; opacity: 1; side: double');
+
+           // 点滅（不透明度 1 ↔ 0.4）… material.opacity を直接アニメ
            this.el.setAttribute('animation__blink',
-           'property: opacity; from: 1; to: 0.45; ' +
+           'property: material.opacity; from: 1; to: 0.4; ' +
            'startEvents: mouseenter; pauseEvents: mouseleave; ' +
-           'dir: alternate; loop: true; dur: 500; easing: easeInOutSine');
+           'dir: alternate; loop: true; dur: 450; easing: easeInOutSine');
+
            // ふわっと拡大縮小（1 ↔ 1.25）
            this.el.setAttribute('animation__pulse',
            'property: scale; from: 1 1 1; to: 1.25 1.25 1.25; ' +
-           'startEvents: mouseenter; pauseEvents: mouseleave; ' +
-           'dir: alternate; loop: true; dur: 500; easing: easeInOutSine');
+            'startEvents: mouseenter; pauseEvents: mouseleave; ' +
+           'dir: alternate; loop: true; dur: 450; easing: easeInOutSine');
            // ▲ 追記ここまで
 
 
@@ -283,6 +288,7 @@
       
        <a-entity id="cam" camera position="0 1.6 0" look-controls>
         <a-entity cursor="fuse:true;fuseTimeout:2000"
+                  raycaster="objects: .hotspot"
                   geometry="primitive:ring;radiusInner:0.01;radiusOuter:0.02"
                   position="0 0 -1.8"
                   material="shader:flat;color:#ff0000"
