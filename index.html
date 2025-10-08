@@ -38,8 +38,25 @@
           this.el.setAttribute("src","#hotspot");
           //make the icon look at the camera all the time
           this.el.setAttribute("look-at","#cam");
-          
 
+           // ▼ ここから追記：arrow.png を“ホバー中だけ点滅＆拡大”
+           // PNGの透明を活かして不透明度アニメが効くように
+           this.el.setAttribute('material', 'transparent: true; alphaTest: 0.01');
+
+           // 点滅（不透明度 1 ↔ 0.45）
+           this.el.setAttribute('animation__blink',
+           'property: material.opacity; from: 1; to: 0.45; ' +
+           'startEvents: mouseenter; pauseEvents: mouseleave; ' +
+           'dir: alternate; loop: true; dur: 500; easing: easeInOutSine');
+
+           // ふわっと拡大縮小（1 ↔ 1.25）
+           this.el.setAttribute('animation__pulse',
+           'property: scale; from: 1 1 1; to: 1.25 1.25 1.25; ' +
+           'startEvents: mouseenter; pauseEvents: mouseleave; ' +
+           'dir: alternate; loop: true; dur: 500; easing: easeInOutSine');
+           // ▲ 追記ここまで
+
+           
           //   - on: mouseenter … 重なった瞬間に1回だけ再生
           //   - positional: false … UI効果音としてスピーカー中央から鳴る
           //   - volume: 適宜調整（0.0 - 1.0）
