@@ -1,2 +1,2 @@
 # higuchi-webar
-樋口[舞鶴]店舗のWebAR
+樋口[大手門]店舗のWebAR
