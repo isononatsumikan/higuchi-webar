@@ -265,12 +265,16 @@
       
        <a-text position="-1 1.6 -3" value="Hover red circle over arrow" color="#008080" font="kelsonsans"></a-text>
       
-      <a-entity id="cam" camera position="0 1.6 0" look-controls>
+       <a-entity id="cam" camera position="0 1.6 0" look-controls>
         <a-entity cursor="fuse:true;fuseTimeout:2000"
                   geometry="primitive:ring;radiusInner:0.01;radiusOuter:0.02"
                   position="0 0 -1.8"
                   material="shader:flat;color:#ff0000"
-                  animation__mouseenter="property:scale;to:3 3 3;startEvents:mouseenter;endEvents:mouseleave;dir:reverse;dur:2000;loop:1">
+                  animation__hover="property: scale;
+                                    from: 1 1 1; to: 1.6 1.6 1.6;
+                                    startEvents: mouseenter; pauseEvents: mouseleave;
+                                    dir: alternate; loop: true; dur: 700;
+                                    easing: easeInOutSine">
         </a-entity>
       </a-entity>
       
